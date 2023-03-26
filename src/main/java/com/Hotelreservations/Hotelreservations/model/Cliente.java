@@ -1,32 +1,39 @@
 package com.Hotelreservations.Hotelreservations.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name= "cliente")
+@Table(name = "clientes")
 public class Cliente {
 
     @Id
-    @Column(name = "cedula_cliente")
+    @Column(name = "cedula")
     private Long cedula;
 
-
-    @Column(name = "nombre_cliente")
+    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "apellido_cliente")
+    @Column(name = "apellido")
     private String apellido;
 
-    @Column(name = "direccion_cliente")
+
+
+    @Column(name = "direccion")
     private String direccion;
 
-    @Column(name = "edad_cliente")
-    private int edad;
+    @Column(name = "edad")
+    private Integer edad;
 
-    @Column(name = "correo_electronico_cliente")
+    @Column(name = "correo_electronico")
     private String correoElectronico;
 
-    public Cliente(Long cedula, String nombre, String apellido, String direccion, int edad, String correoElectronico) {
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Reserva> reservas;
+
+    public Cliente(Long cedula, String nombre, String apellido, String direccion, Integer edad, String correoElectronico) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -35,31 +42,9 @@ public class Cliente {
         this.correoElectronico = correoElectronico;
     }
 
+
+
     public Cliente() {
-    }
-
-    public Long getCedula() {
-        return cedula;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public String getCorreoElectronico() {
-        return correoElectronico;
     }
 
     public void setCedula(Long cedula) {
@@ -78,11 +63,43 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(Integer edad) {
         this.edad = edad;
     }
 
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
+    public Long getCedula() {
+        return cedula;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public Integer getEdad() {
+        return edad;
+    }
+
+    public String getCorreoElectronico() {
+        return correoElectronico;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
     }
 }

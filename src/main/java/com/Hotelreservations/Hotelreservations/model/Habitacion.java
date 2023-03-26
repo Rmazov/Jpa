@@ -1,7 +1,7 @@
 package com.Hotelreservations.Hotelreservations.model;
 
 import javax.persistence.*;
-
+import java.util.List;
 
 
 @Entity
@@ -12,8 +12,6 @@ public class Habitacion {
     @Column(name = "id_habitacion")
     private Long id;
 
-    @Column(name = "numero_habitacion")
-    private int numero;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_habitacion")
@@ -22,11 +20,13 @@ public class Habitacion {
     @Column(name = "precio_base")
     private double precioBase;
 
+    @OneToMany(mappedBy = "habitacion", cascade = CascadeType.ALL)
+    private List<Reserva> reservas;
 
 
-    public Habitacion(Long id, int numero, TipoHabitacion tipo, double precioBase) {
+
+    public Habitacion(Long id, TipoHabitacion tipo, double precioBase) {
         this.id = id;
-        this.numero = numero;
         this.tipo = tipo;
         this.precioBase = precioBase;
     }
@@ -38,9 +38,7 @@ public class Habitacion {
         this.id = id;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
+
 
     public void setTipo(TipoHabitacion tipo) {
         this.tipo = tipo;
@@ -54,9 +52,7 @@ public class Habitacion {
         return id;
     }
 
-    public int getNumero() {
-        return numero;
-    }
+
 
     public TipoHabitacion getTipo() {
         return tipo;
@@ -65,4 +61,20 @@ public class Habitacion {
     public double getPrecioBase() {
         return precioBase;
     }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
+    // toString
+    @Override
+    public String toString() {
+        return "Habitacion [id=" + id + ", numero=" +  ", tipo=" + tipo + ", precioBase=" + precioBase
+                + ", reservas=" + reservas + "]";
+    }
+
 }

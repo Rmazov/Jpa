@@ -6,65 +6,51 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "reservas")
 public class Reserva {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_reserva")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "fecha_reserva")
-    private LocalDate fechaReserva;
-
     @ManyToOne
-    @JoinColumn(name = "id_habitacion")
+    @JoinColumn(name = "id_habitacion", nullable = false)
     private Habitacion habitacion;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente")
+    @JoinColumn(name = "id_cliente", nullable = false)
     private Cliente cliente;
 
-    @Column(name = "total_a_pagar")
+    @Column(name = "fecha_reserva", nullable = false)
+    private LocalDate fechaReserva;
+
+
+    @Column(name = "total_a_pagar", nullable = false)
     private double totalAPagar;
 
+    // Constructor vacío necesario para JPA
+    public Reserva() {}
 
+    public Reserva(Habitacion habitacion, Cliente cliente, LocalDate fechaReserva,  double totalAPagar) {
 
-
-    public Reserva(Long id, LocalDate fechaReserva, Habitacion habitacion, Cliente cliente, double totalAPagar) {
-        this.id = id;
-        this.fechaReserva = fechaReserva;
         this.habitacion = habitacion;
         this.cliente = cliente;
+        this.fechaReserva = fechaReserva;
         this.totalAPagar = totalAPagar;
     }
 
-    public Reserva() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public LocalDate getFechaReserva() {
-        return fechaReserva;
-    }
-
-    public Habitacion getHabitacion() {
-        return habitacion;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public double getTotalAPagar() {
-        return totalAPagar;
+    @Override
+    public String toString() {
+        return "Reserva{" +
+                "id=" + id +
+                ", habitacion=" + habitacion +
+                ", cliente=" + cliente +
+                ", fechaReserva=" + fechaReserva +
+                ", totalAPagar=" + totalAPagar +
+                '}';
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public void setFechaReserva(LocalDate fechaReserva) {
-        this.fechaReserva = fechaReserva;
     }
 
     public void setHabitacion(Habitacion habitacion) {
@@ -75,8 +61,36 @@ public class Reserva {
         this.cliente = cliente;
     }
 
+    public void setFechaReserva(LocalDate fechaReserva) {
+        this.fechaReserva = fechaReserva;
+    }
+
+
+
     public void setTotalAPagar(double totalAPagar) {
         this.totalAPagar = totalAPagar;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Habitacion getHabitacion() {
+        return habitacion;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public LocalDate getFechaReserva() {
+        return fechaReserva;
+    }
+
+
+
+    public double getTotalAPagar() {
+        return totalAPagar;
     }
 }
 
