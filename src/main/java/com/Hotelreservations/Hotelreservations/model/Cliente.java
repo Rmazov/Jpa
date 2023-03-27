@@ -19,8 +19,6 @@ public class Cliente {
     @Column(name = "apellido")
     private String apellido;
 
-
-
     @Column(name = "direccion")
     private String direccion;
 
@@ -30,8 +28,6 @@ public class Cliente {
     @Column(name = "correo_electronico")
     private String correoElectronico;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    private List<Reserva> reservas;
 
     public Cliente(Long cedula, String nombre, String apellido, String direccion, Integer edad, String correoElectronico) {
         this.cedula = cedula;
@@ -41,8 +37,6 @@ public class Cliente {
         this.edad = edad;
         this.correoElectronico = correoElectronico;
     }
-
-
 
     public Cliente() {
     }
@@ -71,9 +65,7 @@ public class Cliente {
         this.correoElectronico = correoElectronico;
     }
 
-    public void setReservas(List<Reserva> reservas) {
-        this.reservas = reservas;
-    }
+
 
     public Long getCedula() {
         return cedula;
@@ -99,7 +91,5 @@ public class Cliente {
         return correoElectronico;
     }
 
-    public List<Reserva> getReservas() {
-        return reservas;
-    }
+
 }

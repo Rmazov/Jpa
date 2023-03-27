@@ -1,5 +1,6 @@
 package com.Hotelreservations.Hotelreservations.service;
 
+import com.Hotelreservations.Hotelreservations.exception.ApiRequestException;
 import com.Hotelreservations.Hotelreservations.model.Cliente;
 import com.Hotelreservations.Hotelreservations.model.Habitacion;
 import com.Hotelreservations.Hotelreservations.model.TipoHabitacion;
@@ -20,8 +21,25 @@ public class ClienteService {
     }
 
     public Cliente crear(Cliente cliente) {
-       this.clienteRepository.save(cliente);
-        return cliente;
+        if(validarCliente(cliente)) {
+            this.clienteRepository.save(cliente);
+            return cliente;
+        }else {
+            throw new ApiRequestException("cedula no numerica o El nombre o el apellido están vacíos o son nulos");
+        }
+    }
+    public boolean validarCliente(Cliente cliente) {
+        if (cliente.getCedula() == null || !cliente.getCedula().toString().matches("\\d+")) {
+            // La cédula no es numérica o es nula
+            return false;
+        }
+
+        if (cliente.getNombre() == null || cliente.getNombre().isEmpty() || cliente.getApellido() == null || cliente.getApellido().isEmpty()) {
+            // El nombre o el apellido están vacíos o son nulos
+            return false;
+        }
+
+        return true;
     }
 
 

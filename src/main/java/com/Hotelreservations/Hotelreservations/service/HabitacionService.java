@@ -28,5 +28,9 @@ public class HabitacionService {
         this.habitacionRepository.save(new Habitacion(5L, TipoHabitacion.PREMIUM,60));
         this.habitacionRepository.save(new Habitacion(6L, TipoHabitacion.PREMIUM,60));
         this.habitacionRepository.save(new Habitacion(7L, TipoHabitacion.PREMIUM,60));
+        this.habitacionRepository.save(new Habitacion(8L, TipoHabitacion.PREMIUM,60));
+        this.habitacionRepository.save(new Habitacion(9L, TipoHabitacion.PREMIUM,60));
+        this.habitacionRepository.save(new Habitacion(10L, TipoHabitacion.PREMIUM,60));
+        this.habitacionRepository.save(new Habitacion(11L, TipoHabitacion.PREMIUM,60));
     }
 }

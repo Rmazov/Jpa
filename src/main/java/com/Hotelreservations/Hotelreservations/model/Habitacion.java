@@ -20,8 +20,7 @@ public class Habitacion {
     @Column(name = "precio_base")
     private double precioBase;
 
-    @OneToMany(mappedBy = "habitacion", cascade = CascadeType.ALL)
-    private List<Reserva> reservas;
+
 
 
 
@@ -62,19 +61,6 @@ public class Habitacion {
         return precioBase;
     }
 
-    public List<Reserva> getReservas() {
-        return reservas;
-    }
 
-    public void setReservas(List<Reserva> reservas) {
-        this.reservas = reservas;
-    }
-
-    // toString
-    @Override
-    public String toString() {
-        return "Habitacion [id=" + id + ", numero=" +  ", tipo=" + tipo + ", precioBase=" + precioBase
-                + ", reservas=" + reservas + "]";
-    }
 
 }

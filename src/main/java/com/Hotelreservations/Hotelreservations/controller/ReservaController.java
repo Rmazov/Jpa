@@ -38,40 +38,33 @@ private ReservaRepository reservaRepository;
         this.clienteRepository = clienteRepository;
         this.reservaRepository = reservaRepository;
     }
-
-
-
-
     @PostMapping("/reservas/{fecha}/{id}/{cedula}")
     public  ResponseEntity<Reserva> crearReserva(@PathVariable String fecha, @PathVariable long id, @PathVariable long cedula)  {
-        Reserva reserva = reservaService.generar(fecha, id, cedula);
-    //return (reserva);
-     return new ResponseEntity("se creo reserva", HttpStatus.CREATED);
-
+     Reserva reserva = reservaService.generar(fecha, id, cedula);
+     return new ResponseEntity(reserva, HttpStatus.CREATED);
     }
 
     @PostMapping("/reservas/disponibles/{fecha}")
     public List<Habitacion> crearReserva(@PathVariable String fecha)  {
-
         List<Habitacion> reserva = reservaService.validarDisponibilidadFecha(fecha);
         return (reserva);
-
     }
 
     @PostMapping("/reservas/disponibles/premiun/{fecha}")
     public List<Habitacion> verDisponiblesPremiun(@PathVariable String fecha)  {
-
         List<Habitacion> reserva = reservaService.validarDisponibilidadFechaPremiun(fecha);
         return (reserva);
-
     }
 
+    @PostMapping("/reservas/disponibles/estandar/{fecha}")
+    public List<Habitacion> verDisponiblesEstandar(@PathVariable String fecha)  {
+        List<Habitacion> reserva = reservaService.validarDisponibilidadFechaEstandar(fecha);
+        return (reserva);
+    }
     @GetMapping("/reservas/{cedula}")
     public List<Reserva> reservasCliente(@PathVariable Long cedula){
         return this.reservaService.verReservasCliente(cedula);
     }
-
-
 
 }
 
