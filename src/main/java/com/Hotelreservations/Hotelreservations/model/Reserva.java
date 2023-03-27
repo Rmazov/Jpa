@@ -38,16 +38,7 @@ public class Reserva {
         this.totalAPagar = totalAPagar;
     }
 
-    @Override
-    public String toString() {
-        return "Reserva{" +
-                "id=" + id +
-                ", habitacion=" + habitacion +
-                ", cliente=" + cliente +
-                ", fechaReserva=" + fechaReserva +
-                ", totalAPagar=" + totalAPagar +
-                '}';
-    }
+
 
     public void setId(Long id) {
         this.id = id;

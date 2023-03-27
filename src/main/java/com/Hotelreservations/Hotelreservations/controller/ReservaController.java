@@ -43,10 +43,10 @@ private ReservaRepository reservaRepository;
 
 
     @PostMapping("/reservas/{fecha}/{id}/{cedula}")
-    public Reserva crearReserva(@PathVariable String fecha, @PathVariable long id, @PathVariable long cedula)  {
+    public  ResponseEntity<Reserva> crearReserva(@PathVariable String fecha, @PathVariable long id, @PathVariable long cedula)  {
         Reserva reserva = reservaService.generar(fecha, id, cedula);
-        return (reserva);
-        // return new ResponseEntity("se creo reserva", HttpStatus.CREATED);
+    //return (reserva);
+     return new ResponseEntity("se creo reserva", HttpStatus.CREATED);
 
     }
 
@@ -64,6 +64,11 @@ private ReservaRepository reservaRepository;
         List<Habitacion> reserva = reservaService.validarDisponibilidadFechaPremiun(fecha);
         return (reserva);
 
+    }
+
+    @GetMapping("/reservas/{cedula}")
+    public List<Reserva> reservasCliente(@PathVariable Long cedula){
+        return this.reservaService.verReservasCliente(cedula);
     }
 
 

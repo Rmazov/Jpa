@@ -1,5 +1,6 @@
 package com.Hotelreservations.Hotelreservations.service;
 
+import com.Hotelreservations.Hotelreservations.exception.ApiRequestException;
 import com.Hotelreservations.Hotelreservations.model.Cliente;
 import com.Hotelreservations.Hotelreservations.model.Habitacion;
 import com.Hotelreservations.Hotelreservations.model.Reserva;
@@ -86,12 +87,14 @@ public class ReservaService {
                     return this.reservaRepository.save(reserva1);
 
                 }else {
-                    return new Reserva();
+                    throw new ApiRequestException("habitacion no disponible para esa fecha");
 
                 }
 
+        }else {
+            throw new ApiRequestException("cliente o habitacion nulas");
         }
-        return new Reserva();
+
    }
 
 
@@ -142,5 +145,18 @@ public class ReservaService {
     }
 
 
+    public List<Reserva> verReservasCliente(Long cedula) {
 
+        List<Reserva> listaDeTodasLasReservas = (List<Reserva>) reservaRepository.findAll();
+        List<Reserva> listaReservasId = new ArrayList<>();
+        for (Reserva reserva : listaDeTodasLasReservas) {
+            Cliente clienteDeReserva = reserva.getCliente();
+            if (clienteDeReserva.getCedula() == cedula) {
+                listaReservasId.add(reserva);
+
+            }
+        }
+        return listaReservasId;
+
+    }
 }
