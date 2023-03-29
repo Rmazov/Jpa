@@ -88,7 +88,12 @@ public boolean validarIdHabitacion(List<Habitacion> disponibles, long id) {
         }
    }
 
-
+    public Integer sumar(Integer numero1, Integer numero2){
+        if(numero1 <= 0 || numero2 <= 0){
+            return 0;
+        }
+        return numero1+numero2;
+    }
     private double calcularPrecioTotal(Habitacion habitacion) {
         double precioBase = habitacion.getPrecioBase();
         String tipo = String.valueOf(habitacion.getTipo());
