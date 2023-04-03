@@ -94,7 +94,7 @@ public boolean validarIdHabitacion(List<Habitacion> disponibles, long id) {
         }
         return numero1+numero2;
     }
-    private double calcularPrecioTotal(Habitacion habitacion) {
+    public double calcularPrecioTotal(Habitacion habitacion) {
         double precioBase = habitacion.getPrecioBase();
         String tipo = String.valueOf(habitacion.getTipo());
         if (tipo.equalsIgnoreCase("ESTANDAR")) {
@@ -104,6 +104,7 @@ public boolean validarIdHabitacion(List<Habitacion> disponibles, long id) {
             return precioBase - descuento;
         }
     }
+
 
     public List<Habitacion> validarDisponibilidadFechaPremiun(String fecha) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -151,6 +152,18 @@ public boolean validarIdHabitacion(List<Habitacion> disponibles, long id) {
                 .collect(Collectors.toList());
 
         return disponibles;
+    }
+    public List<Habitacion> validarDisponibilidadFechaPremium(String fecha) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(fecha, formatter);
+        List<Habitacion> disponiblesPremium = new ArrayList<>();
+        List<Habitacion> disponibles = validarDisponibilidadFecha(fecha);
+
+        disponiblesPremium = disponibles.stream()
+                .filter(habitacion -> habitacion.getTipo() == TipoHabitacion.PREMIUM)
+                .collect(Collectors.toList());
+
+        return disponiblesPremium;
     }
 
     public List<Reserva> verReservasCliente(Long cedula) {

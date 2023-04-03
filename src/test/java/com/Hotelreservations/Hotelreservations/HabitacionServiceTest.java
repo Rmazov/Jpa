@@ -30,6 +30,7 @@ public class HabitacionServiceTest {
 
     @Before
     public void setUp() {
+
         habitacionService = new HabitacionService(habitacionRepositoryMock);
     }
 
@@ -52,4 +53,7 @@ public class HabitacionServiceTest {
 
         verify(habitacionRepositoryMock, times(1)).save(habitacion);
     }
+
+
+
 }
